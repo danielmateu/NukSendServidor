@@ -5,6 +5,7 @@
 - mongoose 
 - dotenv
 - bcrypt
+- express-validator
 
 ## Tecnologías
 
