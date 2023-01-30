@@ -4,6 +4,7 @@
 - nodemon
 - mongoose 
 - dotenv
+- bcrypt
 
 ## Tecnologías
 
