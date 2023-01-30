@@ -6,6 +6,7 @@
 - dotenv
 - bcrypt
 - express-validator
+- jsonwebtoken
 
 ## Tecnologías
 
