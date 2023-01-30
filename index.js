@@ -1,7 +1,6 @@
 const express = require('express');
 const conectarDB = require('./config/db');
 
-
 //Crear Servidor
 const app = express();
 
