@@ -1,9 +1,16 @@
 const Enlaces = require('../models/enlace')
 const shortid = require('shortid');
 const bcrypt = require('bcrypt');
+const { validationResult } = require('express-validator');
+
+
 exports.nuevoEnlace = async(req, res, next) => {
     //Revisar si hay errores
-
+    const errores = validationResult(req);
+    if (!errores.isEmpty()) {
+        return res.status(400).json({ errores: errores.array() });
+    }
+    
     //Crear un objeto de enlace
     const {nombre_original} = req.body
     
