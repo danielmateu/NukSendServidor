@@ -7,6 +7,7 @@
 - bcrypt
 - express-validator
 - jsonwebtoken
+- shortid
 
 ## Tecnologías
 
