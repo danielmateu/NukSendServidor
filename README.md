@@ -8,6 +8,7 @@
 - express-validator
 - jsonwebtoken
 - shortid
+- multer
 
 ## Tecnologías
 

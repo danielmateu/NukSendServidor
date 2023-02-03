@@ -4,6 +4,7 @@ const archivosController = require('../controllers/archivosController')
 // const { check } = require('express-validator')
 const auth = require('../middleware/auth');
 
+
 router.post('/',
     archivosController.subirArchivo
 )
