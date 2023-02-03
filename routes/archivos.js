@@ -6,12 +6,13 @@ const auth = require('../middleware/auth');
 
 
 router.post('/',
+    auth,
     archivosController.subirArchivo
 )
 
-router.delete('/:id',
-    archivosController.eliminarArchivos
-)
+// router.delete('/:id',
+//     archivosController.eliminarArchivos
+// )
 
 module.exports = router
 
