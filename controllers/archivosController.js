@@ -39,5 +39,5 @@ const shortid = require('shortid');
 
 
 exports.eliminarArchivos = async (req, res, next) => {
-
+    console.log('Desde eliminar archivo');
 }

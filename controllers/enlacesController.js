@@ -1,3 +1,4 @@
+
 const Enlaces = require('../models/enlace')
 const shortid = require('shortid');
 const bcrypt = require('bcrypt');
@@ -66,6 +67,20 @@ exports.obtenerEnlace = async (req, res, next) => {
     res.json({archivo: enlace.nombre})
 
     //Si las descargas === 1 hay que borrar la entrada y borrar el archivo
+    const {descargas} = enlace;
+    if(descargas === 1){
+        console.log('Si solo 1');
+        //Eliminar el archivo
+        
+        //Eliminar la entrada a la DB
+        
+        next()
 
-    //Si las descargoas son > 1 - Restar 1
+    }else {
+        //Si las descargoas son > 1 - Restar 1
+        enlace.descargas --;
+        await enlace.save();
+        // console.log('Aun hay descargas')
+    }
+
 }
