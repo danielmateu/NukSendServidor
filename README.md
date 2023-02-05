@@ -9,6 +9,7 @@
 - jsonwebtoken
 - shortid
 - multer
+- cors
 
 ## Tecnologías
 
