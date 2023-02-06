@@ -12,6 +12,7 @@ router.post('/',
 
 router.get('/:archivo',
     archivosController.descargar,
+    archivosController.eliminarArchivos
 )
 
 // router.delete('/:id',
