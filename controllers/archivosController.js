@@ -58,7 +58,7 @@ exports.descargar = async (req, res, next) => {
     //Obtener el enlace
     const { archivo } = req.params;
     const enlace = await Enlaces.findOne({ nombre: archivo })
-    // console.log(enlace);
+
     const archivoDescarga = __dirname + '/../uploads/' + archivo;
     res.download(archivoDescarga);
     // console.log(req.params.archivo)
@@ -68,12 +68,12 @@ exports.descargar = async (req, res, next) => {
     const { descargas, nombre } = enlace;
 
     if (descargas === 1) {
+        // console.log('Si solo 1');
         //Eliminar el archivo
         req.archivo = nombre
 
         //Eliminar la entrada a la DB
         await Enlaces.findOneAndRemove(enlace.id)
-        
         next()
 
     } else {
@@ -82,11 +82,5 @@ exports.descargar = async (req, res, next) => {
         await enlace.save();
         // console.log('Aun hay descargas')
     }
-
-    // if(descargas === 0){
-    //     // res.status(404).json({ msg: 'Ese enlace no existe' })
-    //     res.redirect('back');
-    //     return next();
-    // }
 
 }
