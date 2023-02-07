@@ -9,11 +9,10 @@ const app = express();
 conectarDB()
 
 // Habilitar Cors
-console.log(process.env.FRONTEND_URL);
+// console.log(process.env.FRONTEND_URL);
 const opcionesCors = {
     origin: process.env.FRONTEND_URL
 }
-
 app.use(cors(opcionesCors));
 
 //Puerto de la app

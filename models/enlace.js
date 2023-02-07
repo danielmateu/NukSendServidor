@@ -33,5 +33,4 @@ const enlacesSchema = new Schema({
     }
 })  
 
-// module.exports = mongoose.model('Enlaces', enlacesSchema)
 module.exports = mongoose.model('Enlaces', enlacesSchema)

@@ -1,18 +1,19 @@
 
-const Enlaces = require('../models/enlace')
+const Enlaces = require('../models/Enlace')
 const shortid = require('shortid');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
 
 exports.nuevoEnlace = async (req, res, next) => {
+
     //Revisar si hay errores
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
         return res.status(400).json({ errores: errores.array() });
     }
 
-    console.log(req.body);
+    // console.log(req.body);
 
     //Crear un objeto de enlace
     const { nombre_original, nombre } = req.body
@@ -26,8 +27,8 @@ exports.nuevoEnlace = async (req, res, next) => {
     // console.log(req.usuario);
     if (req.usuario) {
         const { password, descargas } = req.body
-        // /asignar a enlace el número de descargas
 
+        // /asignar a enlace el número de descargas
         if (descargas) {
             enlace.descargas = descargas
         }
@@ -45,8 +46,8 @@ exports.nuevoEnlace = async (req, res, next) => {
     //Almacenar en la DB
     try {
         await enlace.save()
-        res.json({ msg: `${enlace.url}` })
-        return next()
+        return res.json({ msg: `${enlace.url}` })
+        next()
     } catch (error) {
         console.log(error);
     }
@@ -62,10 +63,31 @@ exports.todosEnlaces = async (req, res) => {
     }
 }
 
+//Retorna si el enlace tiene password o no
+exports.tienePassword = async (req, res, next) => {
+
+    // console.log(req.params.url);
+    const {url} = req.params;
+    console.log(url);
+
+    // verificar si existe el enlace
+    const enlace = await Enlaces.findOne( {url} )
+    
+    if(!enlace){
+        res.status(404).json({msg: 'Ese enlace no está disponible'})
+        return next();
+    }
+
+    if(enlace.password){
+        return res.json({ password: true, enlace: enlace.url })
+    }
+    next()
+}
+
 // Obtener Enlace
 exports.obtenerEnlace = async (req, res, next) => {
 
-    const {url} = req.params;
+    // const {url} = req.params;
     // verificar si existe el enlace
     const enlace = await Enlaces.findOne( {url} )
     // console.log(enlace);
@@ -76,10 +98,8 @@ exports.obtenerEnlace = async (req, res, next) => {
     }
 
     //Si el enlace existe 
-    res.json({archivo: enlace.nombre})
+    res.json({archivo: enlace.nombre, password: false})
 
     next()
-
-    
 
 }

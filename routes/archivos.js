@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const archivosController = require('../controllers/archivosController')
-// const { check } = require('express-validator')
 const auth = require('../middleware/auth');
-
-
+// const { check } = require('express-validator')
 router.post('/',
     auth,
     archivosController.subirArchivo
@@ -12,12 +10,8 @@ router.post('/',
 
 router.get('/:archivo',
     archivosController.descargar,
-    archivosController.eliminarArchivos
+    archivosController.eliminarArchivo
 )
 
-// router.delete('/:id',
-//     archivosController.eliminarArchivos
-// )
-
-module.exports = router
+module.exports = router;
 

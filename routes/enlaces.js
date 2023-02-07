@@ -16,13 +16,12 @@ router.post('/',
 
 router.get('/',
     enlacesController.todosEnlaces
-    )
-
-router.get('/:url',
-    enlacesController.obtenerEnlace,
-    archivosController.eliminarArchivos
 )
 
-
+router.get('/:url',
+    enlacesController.tienePassword,
+    enlacesController.obtenerEnlace,
+    // archivosController.eliminarArchivos,
+)
 
 module.exports = router;
