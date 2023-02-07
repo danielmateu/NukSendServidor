@@ -67,39 +67,64 @@ exports.todosEnlaces = async (req, res) => {
 exports.tienePassword = async (req, res, next) => {
 
     // console.log(req.params.url);
-    const {url} = req.params;
+    const { url } = req.params;
     console.log(url);
 
     // verificar si existe el enlace
-    const enlace = await Enlaces.findOne( {url} )
-    
-    if(!enlace){
-        res.status(404).json({msg: 'Ese enlace no está disponible'})
+    const enlace = await Enlaces.findOne({ url })
+
+    if (!enlace) {
+        res.status(404).json({ msg: 'Ese enlace no está disponible' })
         return next();
     }
 
-    if(enlace.password){
+    if (enlace.password) {
         return res.json({ password: true, enlace: enlace.url })
     }
     next()
 }
 
+//Verifica si el password es correcto
+exports.verificarPassword = async (req, res, next) => {
+
+    console.log('verificando...');
+
+    const { url } = req.params;
+
+    //Consultar por el enlace
+    const enlace = await Enlaces.findOne({ url })
+
+    //verificar el password
+    const { password } = req.body;
+    if (bcrypt.compareSync(password, enlace.password)) {
+        // console.log('Correcto');
+        //Permitir descargar el archivo
+        next()
+
+    } else {
+        return res.status(401).json({ msg: 'Password Incorrecto' })
+    }
+
+}
+
 // Obtener Enlace
 exports.obtenerEnlace = async (req, res, next) => {
 
-    const {url} = req.params;
-    const {password} = req.body;
+    const { url } = req.params;
+
+    console.log(url);
+    // const { password } = req.body;
     // verificar si existe el enlace
-    const enlace = await Enlaces.findOne( {url} )
+    const enlace = await Enlaces.findOne({ url })
     // console.log(enlace);
 
-    if(!enlace){
-        res.status(404).json({msg: 'Ese enlace no está disponible'})
+    if (!enlace) {
+        res.status(404).json({ msg: 'Ese enlace no está disponible' })
         return next();
     }
 
     //Si el enlace existe 
-    res.json({archivo: enlace.nombre, password: false})
+    res.json({ archivo: enlace.nombre, password: false })
 
     next()
 
