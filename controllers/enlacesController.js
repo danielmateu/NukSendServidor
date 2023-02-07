@@ -87,7 +87,8 @@ exports.tienePassword = async (req, res, next) => {
 // Obtener Enlace
 exports.obtenerEnlace = async (req, res, next) => {
 
-    // const {url} = req.params;
+    const {url} = req.params;
+    const {password} = req.body;
     // verificar si existe el enlace
     const enlace = await Enlaces.findOne( {url} )
     // console.log(enlace);
