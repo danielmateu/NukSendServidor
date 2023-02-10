@@ -12,8 +12,6 @@ router.post('/',
     usuarioController.nuevoUsuario
 )
 
-router.get('/',
-
-)
+router.get('/')
 
 module.exports = router;

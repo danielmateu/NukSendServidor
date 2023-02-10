@@ -2,8 +2,6 @@ const Usuario = require("../models/Usuario");
 const bcrypt = require('bcrypt');
 const { validationResult } = require("express-validator");
 
-
-
 exports.nuevoUsuario = async(req, res) => {
 
     //Mostrar mensajes de error de express-validator
