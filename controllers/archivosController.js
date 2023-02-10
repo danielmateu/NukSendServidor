@@ -61,17 +61,14 @@ exports.descargar = async (req, res, next) => {
 
     const archivoDescarga = __dirname + '/../uploads/' + archivo;
     res.download(archivoDescarga);
-    // console.log(req.params.archivo)
 
     //Eliminar archivo y entrada de la DB
     //Si las descargas === 1 hay que borrar la entrada y borrar el archivo
     const { descargas, nombre } = enlace;
 
     if (descargas === 1) {
-        // console.log('Si solo 1');
         //Eliminar el archivo
         req.archivo = nombre
-
         //Eliminar la entrada a la DB
         await Enlaces.findOneAndRemove(enlace.id)
         next()
