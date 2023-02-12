@@ -66,11 +66,13 @@ exports.descargar = async (req, res, next) => {
     //Si las descargas === 1 hay que borrar la entrada y borrar el archivo
     const { descargas, nombre } = enlace;
 
+
     if (descargas === 1) {
         //Eliminar el archivo
         req.archivo = nombre
         //Eliminar la entrada a la DB
         await Enlaces.findOneAndRemove(enlace.id)
+
         next()
 
     } else {
